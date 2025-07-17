@@ -13,7 +13,7 @@
             @method('PUT')
             <div class="form-group">
                 <label>Nama Penerbit</label>
-                <input type="text" name="nama" value="{{ $penerbit->nama }}">
+                <input type="text" name="nama_penerbit" value="{{ $penerbit->nama_penerbit }}">
             </div>
 
             <button type="submit" class="tombol">Submit</button>

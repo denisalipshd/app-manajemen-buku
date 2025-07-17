@@ -6,6 +6,9 @@ use App\Models\Buku;
 use App\Models\Kategori;
 use App\Models\Penerbit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Spatie\Activitylog\Models\Activity;
+
 
 class BukuController extends Controller
 {
@@ -33,13 +36,19 @@ class BukuController extends Controller
             'penerbit_id' => 'integer|required|exists:penerbits,id',
         ]);
 
-        Buku::create([
+        $buku = Buku::create([
             'judul' => $request->judul,
             'pengarang' => $request->pengarang,
             'tahun_terbit' => $request->tahun_terbit,
             'kategori_id' => $request->kategori_id,
             'penerbit_id' => $request->penerbit_id
         ]);
+
+        activity()
+            ->causedBy(Auth::user())
+            ->performedOn($buku)
+            ->withProperties(['judul' => $buku->judul])
+            ->log('Menambahkan Buku');
 
         return redirect()->route('buku.index')->with('success', 'Tambah Buku Berhasil');
     }
@@ -73,6 +82,12 @@ class BukuController extends Controller
             'penerbit_id' => $request->penerbit_id
         ]);
 
+        activity()
+            ->causedBy(Auth::user())
+            ->performedOn($buku)
+            ->withProperties(['judul' => $buku->judul])
+            ->log('Mengedit Buku');
+
         return redirect()->route('buku.index')->with('success', 'Edit Buku Berhasil');
     }
 
@@ -87,6 +102,18 @@ class BukuController extends Controller
         $buku = Buku::findOrFail($id);
 
         $buku->delete();
+
+        activity()
+            ->causedBy(Auth::user())
+            ->withProperties(['judul' => $buku->judul])
+            ->log('Menghapus Buku');
+
         return redirect()->route('buku.index')->with('success', 'Hapus Buku Berhasil');
+    }
+
+    public function log()
+    {
+        $logs = Activity::latest()->get();
+        return view('pages.log.buku', compact('logs'));
     }
 }

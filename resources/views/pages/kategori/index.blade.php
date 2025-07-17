@@ -8,6 +8,11 @@
 
       <h3 class="py-2">Daftar Kategori</h3>
       <a href="{{ route('kategori.add') }}" class="tombol pb-2">Tambah</a>
+      <a href="{{ route('kategori.log') }}" class="tombol">Riwayat</a>
+      <form action="{{ route('logout') }}" method="POST" style="display: inline">
+        @csrf
+        <button type="submit" class="tombol">Logout</button>
+      </form>
 
       <div class="table-responsive mt-2">
         @if (session()->has('success'))
@@ -27,7 +32,7 @@
             @foreach ($kategories as $kategori)
               <tr>
               <td>{{ $loop->iteration }}</td>
-              <td>{{ $kategori->nama }}</td>
+              <td>{{ $kategori->nama_kategori }}</td>
               <td>
                 <div class="d-flex align-items-center gap-2">
                   <a href="{{ route('kategori.show', $kategori->id) }}" class="tombol" title="Detail">

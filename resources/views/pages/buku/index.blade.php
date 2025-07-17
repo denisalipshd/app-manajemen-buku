@@ -8,6 +8,11 @@
 
       <h3 class="py-2">Daftar Buku</h3>
       <a href="{{ route('buku.add') }}" class="tombol">Tambah</a>
+      <a href="{{ route('buku.log') }}" class="tombol">Riwayat</a>
+      <form action="{{ route('logout') }}" method="POST" style="display: inline">
+        @csrf
+        <button type="submit" class="tombol">Logout</button>
+      </form>
 
       <div class="table-responsive mt-2">
         @if (session()->has('success'))
@@ -34,8 +39,8 @@
                 <td>{{ $buku->judul }}</td>
                 <td>{{ $buku->pengarang }}</td>
                 <td>{{ $buku->tahun_terbit }}</td>
-                <td>{{ $buku->kategori->nama }}</td>
-                <td>{{ $buku->penerbit->nama }}</td>
+                <td>{{ $buku->kategori->nama_kategori }}</td>
+                <td>{{ $buku->penerbit->nama_penerbit }}</td>
                 <td>
                   <div class="d-flex align-items-center gap-2">
                     <a href="{{ route('buku.show', $buku->id) }}" class="tombol" title="Detail">

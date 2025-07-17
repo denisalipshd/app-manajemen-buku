@@ -29,7 +29,7 @@
                 <label>Kategori Buku</label>
                 <select name="kategori_id">
                     @foreach ($kategories as $kategori)
-                        <option value="{{ $kategori->id }}">{{ $kategori->nama }}</option>
+                        <option value="{{ $kategori->id }}">{{ $kategori->nama_kategori }}</option>
                     @endforeach
                 </select>
             </div>
@@ -38,7 +38,7 @@
                 <label>Penerbit</label>
                 <select name="penerbit_id">
                     @foreach ($penerbits as $penerbit)
-                        <option value="{{ $penerbit->id }}">{{ $penerbit->nama }}</option>
+                        <option value="{{ $penerbit->id }}">{{ $penerbit->nama_penerbit }}</option>
                     @endforeach
                 </select>
             </div>

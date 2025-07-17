@@ -12,7 +12,7 @@
                     <tr>
                         <td width="200px">Nama Kategori</td>
                         <td width="2px">:</td>
-                        <td>{{ $kategori->nama }}</td>
+                        <td>{{ $kategori->nama_kategori }}</td>
                     </tr>
             </tbody>
         </table>

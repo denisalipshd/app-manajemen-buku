@@ -8,6 +8,11 @@
 
       <h3 class="py-2">Daftar Penerbit</h3>
       <a href="{{ route('penerbit.add') }}" class="tombol">Tambah</a>
+      <a href="{{ route('penerbit.log') }}" class="tombol">Riwayat</a>
+      <form action="{{ route('logout') }}" method="POST" style="display: inline">
+        @csrf
+        <button type="submit" class="tombol">Logout</button>
+      </form>
 
       <div class="table-responsive mt-2">
          @if (session()->has('success'))
@@ -27,7 +32,7 @@
            @foreach ($penerbits as $penerbit)
             <tr>
               <td>{{ $loop->iteration }}</td>
-              <td>{{ $penerbit->nama }}</td>
+              <td>{{ $penerbit->nama_penerbit }}</td>
               <td>
                 <div class="d-flex align-items-center gap-2">
                   <a href="{{ route('penerbit.show', $penerbit->id) }}" class="tombol" title="Detail">

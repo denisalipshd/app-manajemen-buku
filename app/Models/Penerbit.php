@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Penerbit extends Model
 {
-    protected $fillable = ['nama'];
+    protected $fillable = ['nama_penerbit'];
 
     public function bukus()
     {

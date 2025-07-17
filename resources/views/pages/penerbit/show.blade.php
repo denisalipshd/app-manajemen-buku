@@ -12,7 +12,7 @@
                     <tr>
                         <td width="200px">Nama Penerbit</td>
                         <td width="2px">:</td>
-                        <td>{{ $penerbit->nama }}</td>
+                        <td>{{ $penerbit->nama_penerbit }}</td>
                     </tr>
             </tbody>
         </table>

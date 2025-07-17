@@ -12,7 +12,7 @@
             @csrf
             <div class="form-group">
                 <label>Nama Kategori</label>
-                <input type="text" name="nama">
+                <input type="text" name="nama_kategori">
             </div>
 
             <button type="submit" class="tombol">Submit</button>

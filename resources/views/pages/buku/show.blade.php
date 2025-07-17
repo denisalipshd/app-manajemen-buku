@@ -28,12 +28,12 @@
                     <tr>
                         <td width="200px">Kategori</td>
                         <td width="2px">:</td>
-                        <td>{{ $buku->kategori->nama }}</td>
+                        <td>{{ $buku->kategori->nama_kategori }}</td>
                     </tr>
                     <tr>
                         <td width="200px">Penerbit</td>
                         <td width="2px">:</td>
-                        <td>{{ $buku->penerbit->nama }}</td>
+                        <td>{{ $buku->penerbit->nama_penerbit }}</td>
                     </tr>
             </tbody>
         </table>

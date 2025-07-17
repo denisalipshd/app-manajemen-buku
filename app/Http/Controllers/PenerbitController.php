@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Penerbit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Spatie\Activitylog\Models\Activity;
 
 class PenerbitController extends Controller
 {
@@ -21,12 +23,18 @@ class PenerbitController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'string|max:255|required'
+            'nama_penerbit' => 'string|max:255|required'
         ]);
 
-        Penerbit::create([
-            'nama' => $request->nama,
+        $penerbit = Penerbit::create([
+            'nama_penerbit' => $request->nama_penerbit,
         ]);
+
+        activity()
+            ->causedBy(Auth::user())
+            ->performedOn($penerbit)
+            ->withProperties(['nama_penerbit' => $penerbit->nama_penerbit])
+            ->log('Menambahkan Penerbit');
 
         return redirect()->route('penerbit.index')->with('success', 'Tambah Penerbit Berhasil');
     }
@@ -40,14 +48,20 @@ class PenerbitController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nama' => 'string|max:255|required'
+            'nama_penerbit' => 'string|max:255|required'
         ]);
 
         $penerbit = Penerbit::findOrFail($id);
 
         $penerbit->update([
-            'nama' => $request->nama
+            'nama_penerbit' => $request->nama_penerbit
         ]);
+
+        activity()
+            ->causedBy(Auth::user())
+            ->performedOn($penerbit)
+            ->withProperties(['nama_penerbit' => $penerbit->nama_penerbit])
+            ->log('Mengedit Penerbit');
 
         return redirect()->route('penerbit.index')->with('success', 'Edit Penerbit Berhasil');
     }
@@ -63,6 +77,19 @@ class PenerbitController extends Controller
         $penerbit = Penerbit::findOrFail($id);
 
         $penerbit->delete();
+
+        activity()
+            ->causedBy(Auth::user())
+            ->performedOn($penerbit)
+            ->withProperties(['nama_penerbit' => $penerbit->nama_penerbit])
+            ->log('Menghapus Penerbit');
+
         return redirect()->route('penerbit.index')->with('success', 'Hapus Penerbit Berhasil');
+    }
+
+    public function log()
+    {
+        $logs = Activity::latest()->get();
+        return view('pages.log.penerbit', compact('logs'));
     }
 }
