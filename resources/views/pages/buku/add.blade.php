@@ -28,6 +28,7 @@
              <div class="form-group">
                 <label>Kategori Buku</label>
                 <select name="kategori_id">
+                    <option value="">-- pilih kategori --</option>
                     @foreach ($kategories as $kategori)
                         <option value="{{ $kategori->id }}">{{ $kategori->nama_kategori }}</option>
                     @endforeach
@@ -37,6 +38,7 @@
              <div class="form-group">
                 <label>Penerbit</label>
                 <select name="penerbit_id">
+                    <option value="">-- pilih penerbit --</option>
                     @foreach ($penerbits as $penerbit)
                         <option value="{{ $penerbit->id }}">{{ $penerbit->nama_penerbit }}</option>
                     @endforeach
