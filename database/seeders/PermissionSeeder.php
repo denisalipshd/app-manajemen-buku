@@ -13,7 +13,7 @@ class PermissionSeeder extends Seeder
      * Run the database seeds.
      */
     public function run(): void
-    {
+    { 
         $permissions = [
             'view.buku', 'create.buku', 'edit.buku', 'delete.buku',
             'view.kategori', 'create.kategori', 'edit.kategori', 'delete.kategori',
